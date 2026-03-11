@@ -113,7 +113,7 @@ HolaMundoDeluxe
 
 # Autor
 
-**Gabriel**
+**Gabriel Herling**
 Estudiante de programación y desarrollo de software.
 
 GitHub:
