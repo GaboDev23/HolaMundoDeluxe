@@ -11,17 +11,33 @@ void holamundo(bool activado) {
  }
 }
 
-void obtenerFecha(bool activado) {
- time_t hora = time(0);
- tm *f = localtime(&hora);
- string fecha = "";
+string agregarCero (int tiempo) {
+ if (tiempo < 10) {
+  return "0" + to_string(tiempo);
+ }
+ return to_string(tiempo);
+}
 
- if (activado == true) {
-  fecha = "\033[32m" + to_string(f -> tm_mday) + "/" + to_string(f -> tm_mon + 1) + "/" + to_string(f -> tm_year + 1900) + "\033[0m";
+void obtenerFecha(bool activado) {
+ time_t tiempo = time(0);
+ tm *f = localtime(&tiempo);
+ string fecha;
+ string hora;
+ string h = agregarCero(f -> tm_hour);
+ string m = agregarCero(f -> tm_min);
+ string s = agregarCero(f -> tm_sec);
+ string fechaBase = to_string(f -> tm_mday) + "/" + to_string(f -> tm_mon + 1) + "/" + to_string(f -> tm_year + 1900);
+ string horaBase = h + ":" + m + ":" + s;
+
+ if (activado) {
+  fecha = "\033[32m" + fechaBase + "\033[0m";
+  hora = "\033[32m" + horaBase + "\033[0m";
  } else {
-  fecha = to_string(f -> tm_mday) + "/" + to_string(f -> tm_mon + 1) + "/" + to_string(f -> tm_year + 1900);
+  fecha = fechaBase;
+  hora = horaBase;
  }
  cout << "Fecha: " << fecha << endl;
+ cout << "Hora: " << hora << endl;
 }
 
 void pedirNombre(string &nombre) {
